@@ -1,6 +1,11 @@
 Strukt Console
 ==============
 
+[![Latest Stable Version](https://poser.pugx.org/strukt/console/v/stable)](https://packagist.org/packages/strukt/console)
+[![Total Downloads](https://poser.pugx.org/strukt/console/downloads)](https://packagist.org/packages/strukt/console)
+[![Latest Unstable Version](https://poser.pugx.org/strukt/console/v/unstable)](https://packagist.org/packages/strukt/console)
+[![License](https://poser.pugx.org/strukt/console/license)](https://packagist.org/packages/strukt/console)
+
 This is a console framework that utilises docblock to parse command description and format.
 
 ## Usage
