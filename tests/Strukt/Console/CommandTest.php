@@ -22,7 +22,7 @@ class CommandTest extends PHPUnit_Framework_TestCase{
 		$this->assertEquals("from-db:ns[Payroll\AuthModule\Model]:type[xml]:path[app/src/Payroll/AuthModule/Model]", $hash);
 	}
 
-	public function testWithoutBooleanSwith__FromDataBase(){
+	public function testWithoutBooleanSwithFromDataBase(){
 
 		$mysqlCmd = "console orm:convert-mapping --namespace Payroll\AuthModule\Model xml app/src/Payroll/AuthModule/Model";
 
@@ -32,7 +32,7 @@ class CommandTest extends PHPUnit_Framework_TestCase{
 		$this->assertEquals("ns[Payroll\AuthModule\Model]:type[xml]:path[app/src/Payroll/AuthModule/Model]", $hash);
 	}
 
-	public function testWithoutInputSwitch__Namespace(){
+	public function testWithoutInputSwitchNamespace(){
 
 		$mysqlCmd = "console orm:convert-mapping xml app/src/Payroll/AuthModule/Model";
 
@@ -42,7 +42,7 @@ class CommandTest extends PHPUnit_Framework_TestCase{
 		$this->assertEquals("type[xml]:path[app/src/Payroll/AuthModule/Model]", $hash);
 	}
 
-	public function testValidation__WrongFileGenerationType(){
+	public function testValidationWrongFileGenerationType(){
 
 		$mysqlCmd = "console orm:convert-mapping json app/src/Payroll/AuthModule/Model";
 
@@ -52,7 +52,7 @@ class CommandTest extends PHPUnit_Framework_TestCase{
 		$this->assertEquals(sprintf("\033[1;41m%s\033[0m", "Invalid type [json]! Supported types are (xml|yaml|annotation)!"), $hash);
 	}
 
-	public function testValidation__NoInputOrInsufficientInput(){
+	public function testValidationNoInputOrInsufficientInput(){
 
 		$mysqlCmd = "console orm:convert-mapping";
 
