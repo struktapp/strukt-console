@@ -1,7 +1,7 @@
 Strukt Console
 ==============
 
-[![Latest Stable Version](https://travis-ci.org/pitsolu/strukt-console.svg?branch=master)](https://packagist.org/packages/strukt/console)
+[![Build Status](https://travis-ci.org/pitsolu/strukt-console.svg?branch=master)](https://packagist.org/packages/strukt/console)
 [![Latest Stable Version](https://poser.pugx.org/strukt/console/v/stable)](https://packagist.org/packages/strukt/console)
 [![Total Downloads](https://poser.pugx.org/strukt/console/downloads)](https://packagist.org/packages/strukt/console)
 [![Latest Unstable Version](https://poser.pugx.org/strukt/console/v/unstable)](https://packagist.org/packages/strukt/console)

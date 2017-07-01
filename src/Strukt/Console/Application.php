@@ -47,6 +47,11 @@ class Application{
 		$this->add(new \Strukt\Console\Command\Console);
 	}
 
+	public function addCmdSect($category){
+
+		$this->commands[] = Color::writeln("yellow", $category);
+	}
+
 	/**
 	* Which OS
 	*
@@ -96,7 +101,7 @@ class Application{
 		$output = new \Strukt\Console\Output();
 		$output
 			->add("\n")
-			->add(sprintf(($isWin)?"%s\n%s\n":"\033[1;32m%s\n%s\033[0m\n", $this->name, str_repeat("=", strlen($this->name))));
+			->add(sprintf(($isWin)?"%s\n%s\n":Color::write("green:bold", "%s\n%s\n"), $this->name, str_repeat("=", strlen($this->name))));
 		
 		try{
 
@@ -109,17 +114,23 @@ class Application{
 				case "-l":
 					$output->add("\n");
 					foreach($this->commands as $key=>$command)
-						if(!$command["object"] instanceof \Strukt\Console\Command\Console)
-							$output->add(sprintf(($isWin)?"%s %s\n":"\033[1;29m%s \033[1;32m%s\033[0m\n", 
+						if(is_string($command))
+							$output->add($command); 
+						elseif(!$command["object"] instanceof \Strukt\Console\Command\Console)
+							$output->add(sprintf(($isWin)?"%s %s\n":sprintf(" %s %s\n", 
+																		Color::write("skyblue:bold", "%s"), 
+																		Color::write("light-blue:bold", "%s")), 
 											str_pad($command["doclist"]["command"]["alias"], $this->padlen), 
 											$command["doclist"]["command"]["descr"]));
+						
+
 				break;
 				case "--help":
 				case "-h":
 					$command = reset($this->commands);
 					if(in_array(@$argv[1], $command["doclist"]["aliases"]) ||
 						in_array(@$argv[1], array_keys($command["doclist"]["aliases"])))
-							$output->add(sprintf(($isWin)?"%s\n":"\033[1;32m%s\033[0m\n", $command["docparser"]->getBlock()));
+							$output->add(sprintf(($isWin)?"%s\n":Color::write("light-yellow:bold", "%s"), $command["docparser"]->getBlock()));
 				break;
 				default:
 					if(in_array(@$argv[1], array_keys($this->commands))){
@@ -128,7 +139,7 @@ class Application{
 						$askHelp = in_array(@$argv[2], array("-h", "--help"));
 
 						if($askHelp)
-							$output->add(sprintf(($isWin)?"%s\n":"\033[1;32m%s\033[0m\n", $command["docparser"]->getBlock()));
+							$output->add(sprintf(($isWin)?"%s\n":Color::write("light-cyan:bold", "%s"), $command["docparser"]->getBlock()));
 						
 						if(!$askHelp){
 
@@ -143,7 +154,7 @@ class Application{
 		}
 		catch(\Exception $e){
 
-			return sprintf(($isWin)?"%s\n":"\033[1;41m%s\033[0m\n", $e->getMessage());
+			return sprintf(($isWin)?"%s\n":Color::writeln("bg-red:bold", "%s"), $e->getMessage());
 		}
 
 		if(!$output->isEmpty())
