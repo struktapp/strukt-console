@@ -58,7 +58,7 @@ class Color{
         'bg-white'          => '107'
     ];
 
-    private function format($colorType){
+    private static function format($colorType){
 
         list($color, $type) = array("default", "plain");
         @list($color, $type) = preg_split("/:/", $colorType);

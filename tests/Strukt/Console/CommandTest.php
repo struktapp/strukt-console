@@ -19,7 +19,8 @@ class CommandTest extends PHPUnit_Framework_TestCase{
 		$mysqlCmd = "console orm:convert-mapping --from-database --namespace Payroll\AuthModule\Model xml app/src/Payroll/AuthModule/Model";
 
 		$result = $this->app->run(explode(" ", $mysqlCmd));
-		$hash = ltrim(end(explode("\n", trim((string)$result))), "\033[0m");
+		$respLines = explode("\n", trim((string)$result));
+		$hash = ltrim(end($respLines), "\033[0m");
 		$expected = 'from-db:ns[Payroll\AuthModule\Model]:type[xml]:path[app/src/Payroll/AuthModule/Model]';
 		
 		$this->assertEquals($expected, $hash);
@@ -30,7 +31,8 @@ class CommandTest extends PHPUnit_Framework_TestCase{
 		$mysqlCmd = "console orm:convert-mapping --namespace Payroll\AuthModule\Model xml app/src/Payroll/AuthModule/Model";
 
 		$result = $this->app->run(explode(" ", $mysqlCmd));
-		$hash = ltrim(end(explode("\n", trim((string)$result))), "\033[0m");
+		$respLines = explode("\n", trim((string)$result));
+		$hash = ltrim(end($respLines), "\033[0m");
 		$expected = "ns[Payroll\AuthModule\Model]:type[xml]:path[app/src/Payroll/AuthModule/Model]";
 		
 		$this->assertEquals($expected, $hash);
@@ -41,7 +43,8 @@ class CommandTest extends PHPUnit_Framework_TestCase{
 		$mysqlCmd = "console orm:convert-mapping xml app/src/Payroll/AuthModule/Model";
 
 		$result = $this->app->run(explode(" ", $mysqlCmd));
-		$hash = ltrim(end(explode("\n", trim((string)$result))), "\033[0m");
+		$respLines = explode("\n", trim((string)$result));
+		$hash = ltrim(end($respLines), "\033[0m");
 		
 		$this->assertEquals("type[xml]:path[app/src/Payroll/AuthModule/Model]", $hash);
 	}
@@ -51,7 +54,8 @@ class CommandTest extends PHPUnit_Framework_TestCase{
 		$mysqlCmd = "console orm:convert-mapping json app/src/Payroll/AuthModule/Model";
 
 		$result = $this->app->run(explode(" ", $mysqlCmd));
-		$hash = end(explode("\n", trim((string)$result)));
+		$respLines = explode("\n", trim((string)$result));
+		$hash = end($respLines);
 		
 		$this->assertEquals(sprintf(Color::write("bg-red:bold", "%s"), "Invalid type [json]! Supported types are (xml|yaml|annotation)!"), $hash);
 	}
@@ -61,7 +65,8 @@ class CommandTest extends PHPUnit_Framework_TestCase{
 		$mysqlCmd = "console orm:convert-mapping";
 
 		$result = $this->app->run(explode(" ", $mysqlCmd));
-		$hash = end(explode("\n", trim((string)$result)));
+		$respLines = explode("\n", trim((string)$result));
+		$hash = end($respLines);
 		
 		$this->assertEquals(sprintf(Color::write("bg-red:bold", "%s"), "Argument [path_to_entities] is required!"), $hash);
 	}

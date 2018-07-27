@@ -61,7 +61,14 @@ class Input{
 
 			$quotes = array("'",'"');
 
-			$optionsExists = preg_match("/-[-\w]+/", $arg);
+			$optionsExists = preg_match("/^-[-\w]+/", $arg);
+
+			// print_r(array(
+
+			// 	"optionExists"=>$optionsExists,
+			// 	"arg"=>$arg
+			// ));
+
 			$argsExists = !empty(key($docList["arguments"]));
 
 			if($optionsExists){
@@ -120,6 +127,8 @@ class Input{
 				$isArgsInDocList = in_array("arguments", array_keys($docList));
 
 				if(!$isParamInArgs && $isArgsInDocList){
+
+					// print_r($ this->args);
 
 					$isParamInDocList = in_array($param, array_keys($docList["arguments"]));
 
