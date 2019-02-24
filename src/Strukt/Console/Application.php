@@ -109,7 +109,14 @@ class Application{
 				$argv[1] = "-h";
 
 			$switches = array("-h", "--help", "-l", "--list");
-			if(!in_array(@$argv[1], array_merge(array_keys($this->commands), $switches)))
+			$allow = array_merge(array_keys($this->commands), $switches);
+			$allow = array_filter($allow, function($var){
+
+				if(!is_numeric($var))
+					return $var;
+			});
+
+			if(!in_array(@$argv[1], $allow))
 				throw new \Exception("Command does not exists!");
 
 			switch(@$argv[1]){
