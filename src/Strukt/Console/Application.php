@@ -108,6 +108,10 @@ class Application{
 			if(empty(@$argv[1]))
 				$argv[1] = "-h";
 
+			$switches = array("-h", "--help", "-l", "--list");
+			if(!in_array(@$argv[1], array_merge(array_keys($this->commands), $switches)))
+				throw new \Exception("Command does not exists!");
+
 			switch(@$argv[1]){
 
 				case "--list":
@@ -133,21 +137,18 @@ class Application{
 							$output->add(sprintf(($isWin)?"%s\n":Color::write("light-yellow:bold", "%s"), $command["docparser"]->getBlock()));
 				break;
 				default:
-					if(in_array(@$argv[1], array_keys($this->commands))){
+					$command = $this->commands[@$argv[1]];
+					$askHelp = in_array(@$argv[2], array("-h", "--help"));
 
-						$command = $this->commands[@$argv[1]];
-						$askHelp = in_array(@$argv[2], array("-h", "--help"));
+					if($askHelp)
+						$output->add(sprintf(($isWin)?"%s\n":Color::write("light-cyan:bold", "%s"), $command["docparser"]->getBlock()));
+					
+					if(!$askHelp){
 
-						if($askHelp)
-							$output->add(sprintf(($isWin)?"%s\n":Color::write("light-cyan:bold", "%s"), $command["docparser"]->getBlock()));
-						
-						if(!$askHelp){
+						$input = new \Strukt\Console\Input($argv, $command["docparser"]);
+						$input->getInputs();
 
-							$input = new \Strukt\Console\Input($argv, $command["docparser"]);
-							$input->getInputs();
-
-							$command["object"]->execute($input, $output);
-						}
+						$command["object"]->execute($input, $output);
 					}
 				break;
 			}
