@@ -4,7 +4,7 @@ use Strukt\Console\Color;
 
 class CommandTest extends PHPUnit\Framework\TestCase{
 
-	public function setUp(){
+	public function setUp():void{
 
 		$this->app = new Strukt\Console\Application();
 		$this->app->add(new Command\DoctrineGenerateEntities);
@@ -57,7 +57,9 @@ class CommandTest extends PHPUnit\Framework\TestCase{
 		$respLines = explode("\n", trim((string)$result));
 		$hash = end($respLines);
 		
-		$this->assertEquals(sprintf(Color::write("bg-red:bold", "%s"), "Invalid type [json]! Supported types are (xml|yaml|annotation)!"), $hash);
+		// $this->assertEquals(sprintf(Color::write("bg-red:bold", "%s"), "Invalid type [json]! Supported types are (xml|yaml|annotation)!"), $hash);
+
+		$this->assertEquals("Invalid type [json]! Supported types are (xml|yaml|annotation)!", $hash);
 	}
 
 	public function testValidationNoInputOrInsufficientInput(){
@@ -68,6 +70,8 @@ class CommandTest extends PHPUnit\Framework\TestCase{
 		$respLines = explode("\n", trim((string)$result));
 		$hash = end($respLines);
 		
-		$this->assertEquals(sprintf(Color::write("bg-red:bold", "%s"), "Argument [path_to_entities] is required!"), $hash);
+		// $this->assertEquals(sprintf(Color::write("bg-red:bold", "%s"), "Argument [path_to_entities] is required!"), $hash);
+
+		$this->assertEquals("Argument [path_to_entities] is required!", $hash);
 	}
 }
