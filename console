@@ -1,0 +1,10 @@
+<?php
+
+require "bootstrap.php";
+
+$console = new Strukt\Console\Application();
+$console->add(new Command\DoctrineGenerateEntities);
+$console->add(new Command\CsvSanity);
+$console->add(new Command\MySQLAuth);
+$console->add(new Command\UserAdd);
+exit($console->run($_SERVER["argv"]));

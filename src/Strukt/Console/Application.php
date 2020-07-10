@@ -53,16 +53,6 @@ class Application{
 	}
 
 	/**
-	* Which OS
-	*
-	* @return string
-	*/
-	public function isWindows(){
-
-		return strtoupper(substr(PHP_OS, 0, 3)) == "WIN";
-	}
-
-	/**
 	* Add commands to console application
 	*
 	* Utiliese {@link DocBlockParser} to extract documentation
@@ -96,7 +86,7 @@ class Application{
 	*/
 	public function run($argv){
 
-		$isWin = $this->isWindows();
+		$isWin = \Strukt\Fs::isWindows();
 
 		$output = new \Strukt\Console\Output();
 		$output

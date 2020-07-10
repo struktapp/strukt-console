@@ -10,7 +10,7 @@ class CommandTest extends PHPUnit\Framework\TestCase{
 		$this->app->add(new Command\DoctrineGenerateEntities);
 
 		$name = "Strukt Console";
-		$isWin = $this->app->isWindows();
+		$isWin = \Strukt\Fs::isWindows();
 		$this->$name = sprintf(($isWin)?"\n%s\n":"\033[1;32m%s\n%s\033[0m\n", $name, str_repeat("=", strlen($name)));
 	}
 
