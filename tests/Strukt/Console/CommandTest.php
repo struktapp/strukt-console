@@ -56,10 +56,15 @@ class CommandTest extends PHPUnit\Framework\TestCase{
 		$result = $this->app->run(explode(" ", $mysqlCmd));
 		$respLines = explode("\n", trim((string)$result));
 		$hash = end($respLines);
-		
-		// $this->assertEquals(sprintf(Color::write("bg-red:bold", "%s"), "Invalid type [json]! Supported types are (xml|yaml|annotation)!"), $hash);
 
-		$this->assertEquals("Invalid type [json]! Supported types are (xml|yaml|annotation)!", $hash);
+		$isWin = \Strukt\Fs::isWindows();
+		
+		$msg = "Invalid type [json]! Supported types are (xml|yaml|annotation)!";
+
+		if($isWin)
+			$this->assertEquals($msg, $hash);
+		else
+			$this->assertEquals(sprintf(Color::write("bg-red:bold", "%s"), $msg), $hash);
 	}
 
 	public function testValidationNoInputOrInsufficientInput(){
@@ -70,8 +75,13 @@ class CommandTest extends PHPUnit\Framework\TestCase{
 		$respLines = explode("\n", trim((string)$result));
 		$hash = end($respLines);
 		
-		// $this->assertEquals(sprintf(Color::write("bg-red:bold", "%s"), "Argument [path_to_entities] is required!"), $hash);
+		$isWin = \Strukt\Fs::isWindows();
 
-		$this->assertEquals("Argument [path_to_entities] is required!", $hash);
+		$msg = "Argument [path_to_entities] is required!";
+
+		if($isWin)
+			$this->assertEquals($msg, $hash);
+		else
+			$this->assertEquals(sprintf(Color::write("bg-red:bold", "%s"), $msg), $hash);
 	}
 }
