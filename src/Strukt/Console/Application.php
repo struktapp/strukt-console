@@ -113,7 +113,7 @@ class Application{
 					similar_text($val, @$argv[1], $perc);
 
 					if($perc > 50)
-						return $val;
+						return sprintf(" %s", $val);
 
 					return null;
 
