@@ -106,8 +106,27 @@ class Application{
 					return $var;
 			});
 
-			if(!in_array(@$argv[1], $allow))
-				throw new \Exception("Command does not exists!");
+			if(!in_array(@$argv[1], $allow)){
+
+				$allow = array_filter(array_map(function($val) use ($argv){
+
+					similar_text($val, @$argv[1], $perc);
+
+					if($perc > 50)
+						return $val;
+
+					return null;
+
+				}, $allow));
+
+				if(empty($allow))
+					throw new \Exception("Command does not exists!");
+
+				$output->add("\nOops! Available commands:\n\n");
+				$output->add(implode("\n", $allow));
+				
+				return $output->add("\n")->write();
+			}
 
 			switch(@$argv[1]){
 

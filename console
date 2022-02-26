@@ -4,6 +4,7 @@
 require "bootstrap.php";
 
 $console = new Strukt\Console\Application();
+$console->addCmdSect("Test");
 $console->add(new Command\DoctrineGenerateEntities);
 $console->add(new Command\CsvSanity);
 $console->add(new Command\MySQLAuth);
