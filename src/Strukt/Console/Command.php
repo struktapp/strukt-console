@@ -4,13 +4,14 @@ namespace Strukt\Console;
 
 use Strukt\Console\Input;
 use Strukt\Console\Output;
+use Strukt\Console\Command\Contract\CommandInterface;
 
 /**
 * Abstract Command class
 *
 * @author Moderator <pitsolu@gmail.com>
 */
-abstract class Command{
+abstract class Command implements CommandInterface{
 
 	/**
 	* Execute command implementation

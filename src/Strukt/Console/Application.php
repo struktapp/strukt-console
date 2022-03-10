@@ -2,6 +2,8 @@
 
 namespace Strukt\Console;
 
+use Strukt\Console\Command\Contract\CommandInterface;
+
 /**
 * Strukt Console Application class
 *
@@ -62,7 +64,7 @@ class Application{
 	*
 	* @return void
 	*/
-	public function add(\Strukt\Console\Command $command){
+	public function add(CommandInterface $command){
 
 		$class = get_class($command);
 		$docBlockParser = new \Strukt\Console\DocBlockParser($class);
