@@ -9,6 +9,12 @@ Strukt Console
 
 This is a console framework that utilises docblock to parse command description and format.
 
+# IMPORTANT
+
+This package uses docblock to generate your commands. The docblock must be in single spaces
+and *NOT* tabs. Be conservative with the spaces and don't leave any that are unnecessary
+otherwise the commands will not work.
+
 ## Usage
 
 Sample Command:
