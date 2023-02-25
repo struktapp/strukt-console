@@ -26,6 +26,13 @@ class Application{
 	private $name;
 
 	/**
+	* Name of CLI file
+	*
+	* @var string $filename 
+	*/
+	private $filename;
+
+	/**
 	* Left padding 
 	*
 	* @var int $padlen
@@ -39,9 +46,10 @@ class Application{
 	*
 	* @return void
 	*/
-	public function __construct($name=""){
+	public function __construct($name="", $filename = "console"){
 
 		$this->name = "Strukt Console";
+		$this->filename = $filename;
 
 		if(!empty($name))
 			$this->name = $name;
@@ -152,7 +160,7 @@ class Application{
 					$command = reset($this->commands);
 					if(in_array(@$argv[1], $command["doclist"]["aliases"]) ||
 						in_array(@$argv[1], array_keys($command["doclist"]["aliases"])))
-							$output->add(sprintf(($isWin)?"%s\n":Color::write("light-yellow:bold", "%s"), $command["docparser"]->getBlock()));
+							$output->add(sprintf(($isWin)?"%s\n":Color::write("light-yellow:bold", "%s"), str_replace("console", $this->filename, $command["docparser"]->getBlock())));
 				break;
 				default:
 					$command = $this->commands[@$argv[1]];
