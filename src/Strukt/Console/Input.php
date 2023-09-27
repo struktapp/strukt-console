@@ -49,6 +49,8 @@ class Input{
 	*/
 	private function parse(){
 
+		$args = [];
+
 		$docList = $this->docBlock->parse();
 
 		$filename = array_shift($this->argv);
