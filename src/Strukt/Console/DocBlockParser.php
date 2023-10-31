@@ -141,7 +141,17 @@ class DocBlockParser{
 									"required"=>true, 
 									"input"=>true
 								);
-							}							
+							}	
+							elseif(preg_match("/^<\w+\.+>$/", $part)){
+
+								$part = str_replace(array("<",">"), "", $part);
+								$part = trim($part, ".");
+								$blockList["usage"][$part] = array(
+
+									"required"=>true,
+									"all"=>true
+								);
+							}						
 							elseif(preg_match("/^<\w+>$/", $part)){
 
 								$part = str_replace(array("<",">"), "", $part);

@@ -31,6 +31,13 @@ class Input{
 	private $argv;
 
 	/**
+	* Original raw input arguments
+	*
+	* @var array $argo
+	*/
+	private $argo;
+
+	/**
 	* Constructor
 	*
 	* @param array $argv raw arguments
@@ -38,6 +45,7 @@ class Input{
 	*/
 	public function __construct($argv, \Strukt\Console\DocBlockParser $parser){
 
+		$this->argo = $argv;
 		$this->argv = $argv;
 		$this->docBlock = $parser;
 	}
@@ -65,18 +73,13 @@ class Input{
 
 			$optionsExists = preg_match("/^-[-\w]+/", $arg);
 
-			// print_r(array(
-
-			// 	"optionExists"=>$optionsExists,
-			// 	"arg"=>$arg
-			// ));
-
 			$argsExists = !empty(key($docList["arguments"]));
 
 			if($optionsExists){
 
 				$optionExists = in_array($arg, array_keys($docList["options"]));
-				$optionAliasExists = @in_array($arg, array_keys($docList["aliases"]));
+				if(array_key_exists("aliases", $docList))
+					$optionAliasExists = @in_array($arg, array_keys($docList["aliases"]));
 
 				if($optionExists){
 
@@ -130,8 +133,6 @@ class Input{
 
 				if(!$isParamInArgs && $isArgsInDocList){
 
-					// print_r($ this->args);
-
 					$isParamInDocList = in_array($param, array_keys($docList["arguments"]));
 
 					if($isParamInDocList)
@@ -141,11 +142,32 @@ class Input{
 					if($usage["required"])
 						throw new \Exception(sprintf("Option [%s] is required!", $param));
 				}
+
+				if(array_key_exists("all", $usage)){
+
+					if($usage["all"])
+						$unknowns = [];
+				}
 			}
 		}
 
 		if(!empty($unknowns))
 			throw new \Exception(sprintf("Unknown parameter/input [%s]!", current($unknowns)));
+	}
+
+	/**
+	* get original input arguments
+	*
+	* @return array
+	*/
+	public function getAll(){
+
+		$argo = $this->argo;
+		
+		array_shift($argo);
+		array_shift($argo);
+
+		return $argo;
 	}
 
 	/**
