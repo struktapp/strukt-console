@@ -3,7 +3,9 @@
 use Strukt\Console\DocBlockParser;
 use Strukt\Console\Color;
 
-if(!function_exists("docblock")){
+helper("console");
+
+if(helper_add("docblock")){
 
 	function docblock(string $class){
 
@@ -14,7 +16,7 @@ if(!function_exists("docblock")){
 	}
 }
 
-if(!function_exists("color")){
+if(helper_add("color")){
 
 	function color(string $color_type, string $content){
 
@@ -22,7 +24,7 @@ if(!function_exists("color")){
 	}
 }
 
-if(!function_exists("colorln")){
+if(helper_add("colorln")){
 
 	function colorln(string $color_type, string $content){
 
