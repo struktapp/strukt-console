@@ -60,7 +60,7 @@ class Color{
         'bg-white'          => '107'
     ];
 
-    private static function halt(bool $halt = true){
+    public static function halt(bool $halt = true){
 
         static::$halt = $halt;
     }
