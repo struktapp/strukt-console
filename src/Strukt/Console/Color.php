@@ -4,6 +4,8 @@ namespace Strukt\Console;
 
 class Color{
 
+    protected static $halt = false;
+
     protected static $typeArr = [
 
         "plain"=>'0',
@@ -58,6 +60,11 @@ class Color{
         'bg-white'          => '107'
     ];
 
+    private static function halt(bool $halt = true){
+
+        static::$halt = $halt;
+    }
+
     private static function format($colorType){
 
         list($color, $type) = array("default", "plain");
@@ -70,11 +77,17 @@ class Color{
 
     public static function write($colorType, $str){
 
-        return sprintf("%s%s\033[0m", static::format($colorType), $str);
+        if(!static::$halt)
+            return sprintf("%s%s\033[0m", static::format($colorType), $str);
+
+        return $str;
     }
 
     public static function writeln($colorType, $str){
 
-        return sprintf("%s%s\033[0m\n", static::format($colorType), $str);
+        if(!static::$halt)
+            return sprintf("%s%s\033[0m\n", static::format($colorType), $str);
+
+        return $str;
     }
 }
