@@ -42,11 +42,10 @@ class Application{
 	/**
 	* Construct
 	*
-	* @param string $name console application name
-	*
-	* @return void
+	* @param string $name  - console application name
+	* @param string $filename
 	*/
-	public function __construct($name="", $filename = "console"){
+	public function __construct(string $name="", string $filename = "console"){
 
 		$this->name = "Strukt Console";
 		$this->filename = $filename;
@@ -57,7 +56,12 @@ class Application{
 		$this->add(new \Strukt\Console\Command\Console);
 	}
 
-	public function addCmdSect($category){
+	/**
+	 * @param string $category
+	 * 
+	 * @return void
+	 */
+	public function addCmdSect(string $category):void{
 
 		$this->commands[] = Color::writeln("yellow", $category);
 	}
@@ -72,7 +76,7 @@ class Application{
 	*
 	* @return void
 	*/
-	public function add(CommandInterface $command){
+	public function add(CommandInterface $command):void{
 
 		$class = get_class($command);
 		$docBlockParser = new \Strukt\Console\DocBlockParser($class);
@@ -94,7 +98,7 @@ class Application{
 	*
 	* @return string
 	*/
-	public function run($argv){
+	public function run(array $argv):string{
 
 		$isWin = \Strukt\Fs::isWindows();
 

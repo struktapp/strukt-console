@@ -21,9 +21,9 @@ class DocBlockParser{
 	/**
 	* Constructor
 	*
-	* @param string $class class name
+	* @param string $class - class name
 	*/
-	public function __construct($class){
+	public function __construct(string $class){
 
 		$reflector = new \ReflectionClass($class);
 
@@ -38,7 +38,7 @@ class DocBlockParser{
 	*
 	* @return string
 	*/
-	public function getBlock(){
+	public function getBlock():string{
 
 		return implode("\n ", array_map(function($line){
 
@@ -54,7 +54,7 @@ class DocBlockParser{
 	*
 	* @return array
 	*/
-	private function sanitize($rawBlock){
+	private function sanitize(string $rawBlock):array{
 
 		return array_map(function($line){ 
 
@@ -71,7 +71,7 @@ class DocBlockParser{
 	*
 	* @return array
 	*/
-	public function parse(){
+	public function parse():array{
 
 		$docBlockList = $this->sanitize($this->block);
 

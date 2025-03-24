@@ -4,14 +4,17 @@ use Strukt\Console\Color;
 
 class CommandTest extends PHPUnit\Framework\TestCase{
 
+	private $app;
+	private $name;
+
 	public function setUp():void{
 
 		$this->app = new Strukt\Console\Application();
 		$this->app->add(new Command\DoctrineGenerateEntities);
 
-		$name = "Strukt Console";
-		$isWin = \Strukt\Fs::isWindows();
-		$this->$name = sprintf(($isWin)?"\n%s\n":"\033[1;32m%s\n%s\033[0m\n", $name, str_repeat("=", strlen($name)));
+		// $name = "Strukt Console";
+		// $isWin = \Strukt\Fs::isWindows();
+		// $this->$name = sprintf(($isWin)?"\n%s\n":"\033[1;32m%s\n%s\033[0m\n", $name, str_repeat("=", strlen($name)));
 	}
 
 	public function testRunFullValidCommand(){

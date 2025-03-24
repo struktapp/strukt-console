@@ -7,7 +7,12 @@ helper("console");
 
 if(helper_add("docblock")){
 
-	function docblock(string $class){
+	/**
+	 * @param string $class
+	 * 
+	 * @return array|null
+	 */
+	function docblock(string $class):array|null{
 
 		if(class_exists($class))
 			return (new DocBlockParser($class))->parse();
@@ -18,7 +23,13 @@ if(helper_add("docblock")){
 
 if(helper_add("color")){
 
-	function color(string $color_type, string $content){
+	/**
+	 * @param string $color_type
+	 * @param string $content
+	 * 
+	 * @return string
+	 */
+	function color(string $color_type, string $content):string{
 
 		return Color::write($color_type, $content);
 	}
@@ -26,7 +37,13 @@ if(helper_add("color")){
 
 if(helper_add("colorln")){
 
-	function colorln(string $color_type, string $content){
+	/**
+	 * @param string $color_type
+	 * @param string $content
+	 * 
+	 * @return string
+	 */
+	function colorln(string $color_type, string $content):string{
 
 		return Color::writeln($color_type, $content);
 	}

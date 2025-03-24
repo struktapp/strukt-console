@@ -27,9 +27,9 @@ class Output{
 	*
 	* @param string $output
 	*
-	* @return \Strukt\Console\Output
+	* @return static
 	*/
-	public function add($output){
+	public function add($output):static{
 
 		$this->output[] = $output;
 
@@ -39,9 +39,9 @@ class Output{
 	/**
 	* Is output stack empty
 	*
-	* @return void
+	* @return bool
 	*/
-	public function isEmpty(){
+	public function isEmpty():bool{
 
 		return count($this->output) == 2;
 	}
@@ -51,7 +51,7 @@ class Output{
 	*
 	* @return string
 	*/
-	public function write(){
+	public function write():string{
 
 		return implode("", $this->output);
 	}

@@ -2,6 +2,8 @@
 
 namespace Strukt\Console;
 
+use Strukt\Console\DocBlockParser;
+
 /**
 * Console Input class
 *
@@ -43,7 +45,7 @@ class Input{
 	* @param array $argv raw arguments
 	* @param \Strukt\Console\DocBlockParser $parser
 	*/
-	public function __construct($argv, \Strukt\Console\DocBlockParser $parser){
+	public function __construct(array $argv, DocBlockParser $parser){
 
 		$this->argo = $argv;
 		$this->argv = $argv;
@@ -55,7 +57,7 @@ class Input{
 	*
 	* @return void
 	*/
-	private function parse(){
+	private function parse():void{
 
 		$args = [];
 
@@ -160,7 +162,7 @@ class Input{
 	*
 	* @return array
 	*/
-	public function getAll(){
+	public function getAll():array{
 
 		$argo = $this->argo;
 		
@@ -175,7 +177,7 @@ class Input{
 	*
 	* @return array
 	*/
-	public function getInputs(){
+	public function getInputs():array{
 
 		if(is_null($this->args))
 			$this->parse();
@@ -190,7 +192,7 @@ class Input{
 	*
 	* @return string
 	*/
-	public function get($key){
+	public function get(string $key):string|null{
 
 		if(!is_null($this->args))
 			if(in_array($key, array_keys($this->args)))
@@ -205,11 +207,11 @@ class Input{
 	* Note: uses readline extenstion
 	*		history enabled
 	*
-	* @param string $query prompt text
+	* @param string $query - prompt text
 	*
 	* @return string
 	*/
-	public function getInput($query){
+	public function getInput(string $query):string{
 
 		if(function_exists('readline'))
            $line = readline($query);
@@ -239,7 +241,7 @@ class Input{
 	 *
 	 * @return string
 	 */
-	public function getMaskedInput($prompt = "Enter Password:") {
+	public function getMaskedInput(string $prompt = "Enter Password:") {
 
 		$isWin = preg_match('/^win/i', PHP_OS);
 

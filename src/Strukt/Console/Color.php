@@ -2,6 +2,9 @@
 
 namespace Strukt\Console;
 
+/**
+* @author Moderator <pitsolu@gmail.com>
+*/
 class Color{
 
     protected static $halt = false;
@@ -60,12 +63,24 @@ class Color{
         'bg-white'          => '107'
     ];
 
-    public static function halt(bool $halt = true){
+    /**
+     * Print without styling
+     * 
+     * @param book $halt
+     * 
+     * @return void
+     */
+    public static function halt(bool $halt = true):void{
 
         static::$halt = $halt;
     }
 
-    private static function format($colorType){
+    /**
+     * @param string $colorType
+     * 
+     * @return string
+     */
+    private static function format(string $colorType):string{
 
         list($color, $type) = array("default", "plain");
         @list($color, $type) = preg_split("/:/", $colorType);
@@ -75,19 +90,31 @@ class Color{
         return sprintf("\033[%s", $colorCode);
     }
 
-    public static function write($colorType, $str){
+    /**
+     * @param string $colorType
+     * @param string $content
+     * 
+     * @return string
+     */
+    public static function write(string $colorType, string $content):string{
 
         if(!static::$halt)
-            return sprintf("%s%s\033[0m", static::format($colorType), $str);
+            return sprintf("%s%s\033[0m", static::format($colorType), $content);
 
-        return $str;
+        return $content;
     }
 
-    public static function writeln($colorType, $str){
+    /**
+     * @param string $colorType
+     * @param string $content
+     * 
+     * @return string
+     */
+    public static function writeln(string $colorType, string $content):string{
 
         if(!static::$halt)
-            return sprintf("%s%s\033[0m\n", static::format($colorType), $str);
+            return sprintf("%s%s\033[0m\n", static::format($colorType), $content);
 
-        return $str;
+        return $content;
     }
 }
