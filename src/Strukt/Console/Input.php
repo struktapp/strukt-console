@@ -175,9 +175,9 @@ class Input{
 	/**
 	* get synthesised input arguments
 	*
-	* @return array
+	* @return array|null
 	*/
-	public function getInputs():array{
+	public function getInputs():array|null{
 
 		if(is_null($this->args))
 			$this->parse();
