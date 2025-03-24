@@ -96,9 +96,9 @@ class Application{
 	*
 	* @param array $argv parse in commandline parameters
 	*
-	* @return string
+	* @return string|null
 	*/
-	public function run(array $argv):string{
+	public function run(array $argv):string|null{
 
 		$isWin = \Strukt\Fs::isWindows();
 
@@ -190,5 +190,7 @@ class Application{
 
 		if(!$output->isEmpty())
 			return $output->add("\n")->write();
+
+		return null;
 	}
 }
