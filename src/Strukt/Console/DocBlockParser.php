@@ -73,6 +73,7 @@ class DocBlockParser{
 	*/
 	public function parse():array{
 
+		$blockList = [];
 		$docBlockList = $this->sanitize($this->block);
 
 		foreach($docBlockList as $line){
