@@ -7,11 +7,11 @@ Strukt Console
 [![Latest Unstable Version](https://poser.pugx.org/strukt/console/v/unstable)](https://packagist.org/packages/strukt/console)
 [![License](https://poser.pugx.org/strukt/console/license)](https://packagist.org/packages/strukt/console)
 
-This is a console framework that utilises docblock to parse command description and format.
+This is a console framework that utilises `DocBlock` to parse command description and format.
 
-# IMPORTANT
+## Block Spaces (IMPORTANT)
 
-This package uses docblock to generate your commands. The docblock must be in single spaces
+This package uses `DocBlock` to generate your commands. The `DocBlock` must be in single spaces
 and *NOT* tabs. Be conservative with the spaces and don't leave any that are unnecessary
 otherwise the commands will not work.
 
@@ -24,6 +24,7 @@ namespace Command;
 
 use Strukt\Console\Input;
 use Strukt\Console\Output;
+use \Strukt\Console\Command as AbstractCommand;
 
 /**
 * mysql:auth          MySQL Authentication
@@ -42,7 +43,7 @@ use Strukt\Console\Output;
 *      --password -p   MySQL Password
 *      --host -h       MySQL Host - optional default 127.0.0.1
 */
-class MySQLAuth extends \Strukt\Console\Command{ 
+class MySQLAuth extends AbstractCommand{ 
 
 	public function execute(Input $in, Output $out){
 
@@ -67,7 +68,7 @@ $app->run($_SERVER["argv"]);
 Call command:
 
 ```sh
-$ php console mysql:auth payroll -u root -p p@55w0rd
+php console mysql:auth payroll -u root -p p@55w0rd
 ```
 
 Prompt for input and masked input, you may but need not describe promted input 
