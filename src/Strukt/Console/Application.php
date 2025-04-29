@@ -45,13 +45,10 @@ class Application{
 	* @param string $name  - console application name
 	* @param string $filename
 	*/
-	public function __construct(string $name="", string $filename = "console"){
+	public function __construct(string $name="Strukt Console", string $filename = "console"){
 
-		$this->name = "Strukt Console";
 		$this->filename = $filename;
-
-		if(!empty($name))
-			$this->name = $name;
+		$this->name = $name;
 
 		$this->add(new \Strukt\Console\Command\Console);
 	}
