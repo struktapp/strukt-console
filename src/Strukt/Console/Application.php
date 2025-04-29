@@ -100,9 +100,10 @@ class Application{
 		$isWin = \Strukt\Fs::isWindows();
 
 		$output = new \Strukt\Console\Output();
-		$output
-			->add("\n")
-			->add(sprintf(($isWin)?"%s\n%s\n":Color::write("green:bold", "%s\n%s\n"), $this->name, str_repeat("=", strlen($this->name))));
+		if(!empty($this->name))
+			$output
+				->add("\n")
+				->add(sprintf(($isWin)?"%s\n%s\n":Color::write("green:bold", "%s\n%s\n"), $this->name, str_repeat("=", strlen($this->name))));
 		
 		try{
 
