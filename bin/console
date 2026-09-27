@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+$autoload = getcwd().'/vendor/autoload.php';
+if (!is_file($autoload)) {
+    fwrite(STDERR, "Composer autoloader not found. Run 'composer install' in your project.\n");
+    exit(1);
+}
+require $autoload;
+
+$config = getcwd().'/console.php';
+$settings = is_file($config) ? require $config : [];
+$directory = $settings['commands'] ?? getcwd().'/src/Command';
+$docs = $settings['docs'] ?? getcwd().'/docs/commands';
+exit((new Strukt\Console\Runtime\Application($directory, $docs))->run($argv));
