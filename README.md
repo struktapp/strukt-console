@@ -14,13 +14,13 @@ The goal is simple: **define the command once, close to the code that implements
 ## Install
 
 ```bash
-composer require command-spec/command-spec
+composer require strukt/console
 ```
 
 Copy the example configuration:
 
 ```bash
-cp command-spec.php.example command-spec.php
+cp console.php.example console.php
 ```
 
 Create `src/Command/CreateUser.php`:
@@ -71,26 +71,26 @@ final class CreateUser implements CommandInterface
 Run it:
 
 ```bash
-vendor/bin/command-spec user:create john@example.com --name="John Doe" --admin --password=secret
+vendor/bin/console user:create john@example.com --name="John Doe" --admin --password=secret
 ```
 
 Get help:
 
 ```bash
-vendor/bin/command-spec user:create --help
+vendor/bin/console user:create --help
 ```
 
 List commands:
 
 ```bash
-vendor/bin/command-spec
-vendor/bin/command-spec list
+vendor/bin/console
+vendor/bin/console list
 ```
 
 Generate Markdown documentation:
 
 ```bash
-vendor/bin/command-spec docs
+vendor/bin/console docs
 ```
 
 ## Command specification
