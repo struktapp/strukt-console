@@ -1,8 +1,8 @@
-# CommandSpec
+# Strukt Console
 
 **Documentation-first PHP CLI commands.**
 
-CommandSpec turns a structured PHPDoc block on a command class into a runnable CLI command, automatic argument/option validation, `--help` output, and generated Markdown documentation.
+Strukt Console turns a structured PHPDoc block on a command class into a runnable CLI command, automatic argument/option validation, `--help` output, and generated Markdown documentation.
 
 The goal is simple: **define the command once, close to the code that implements it.**
 
@@ -32,7 +32,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use CommandSpec\Runtime\CommandInterface;
+use Strukt\Console\Runtime\CommandInterface;
 
 /**
  * @command user:create
@@ -109,7 +109,7 @@ Short command description.
 
 ### `@usage`
 
-Optional explicit usage line. If omitted, CommandSpec builds one from the arguments and options.
+Optional explicit usage line. If omitted, Strukt Console builds one from the arguments and options.
 
 ### Arguments
 
@@ -184,7 +184,7 @@ Returning `0` means success. Any non-zero return value is propagated to the shel
 
 ## Configuration
 
-Create `command-spec.php` in the consuming project:
+Create `console.php` in the consuming project:
 
 ```php
 <?php
@@ -197,7 +197,7 @@ return [
 
 ## Design philosophy
 
-CommandSpec intentionally uses an explicit mini-DSL instead of trying to infer executable behavior from arbitrary prose. This keeps documentation human-readable while making the executable specification deterministic.
+Strukt Console intentionally uses an explicit mini-DSL instead of trying to infer executable behavior from arbitrary prose. This keeps documentation human-readable while making the executable specification deterministic.
 
 The same command definition is the source for:
 

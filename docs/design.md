@@ -1,6 +1,6 @@
 # Design
 
-CommandSpec follows a documentation-first pipeline:
+Strukt Console follows a documentation-first pipeline:
 
 ```text
 PHPDoc
