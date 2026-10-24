@@ -35,6 +35,34 @@ final class Renderer
         return $out;
     }
 
+    /**
+     * Renders a command list grouped into labelled sections.
+     *
+     * Each section carries an optional `title` heading and the commands to list
+     * beneath it. Sections without commands are expected to be dropped by the
+     * caller before rendering.
+     *
+     * @param list<array{title: string|null, commands: list<CommandDefinition>}> $sections Sectioned commands.
+     * @return string Rendered list.
+     */
+    public function sections(array $sections): string
+    {
+        $out = "Available commands:\n";
+        foreach ($sections as $section) {
+            $title = $section['title'] ?? null;
+            if ($title !== null && $title !== '') {
+                $out .= sprintf("\n%s\n", $title);
+            }
+
+            $out .= "\n";
+            foreach ($section['commands'] as $definition) {
+                $out .= $this->line($definition->name, $definition->description);
+            }
+        }
+
+        return $out;
+    }
+
     public function markdown(CommandDefinition $d): string
     {
         $out = '# `' . $d->name . "`\n\n" . $d->description . "\n\n## Usage\n\n```bash\n" . ($d->usage ?? $d->name) . "\n```\n";

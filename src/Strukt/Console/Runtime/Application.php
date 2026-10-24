@@ -14,6 +14,7 @@ final class Application
     public function __construct(
         private string $commandDirectory,
         private ?string $docsDirectory = null,
+        private $commandFactory = null,
     ) {}
 
     public function run(array $argv): int
@@ -37,7 +38,9 @@ final class Application
 
             if (in_array('--help', array_slice($argv, 2), true) || in_array('-h', array_slice($argv, 2), true)) {echo(new Renderer())->help($definitions[$command]);return 0;}
             [$arguments, $options] = (new Input())->parse($definitions[$command], $argv);
-            $instance              = new $definitions[$command]->class();
+            $instance              = is_callable($this->commandFactory)
+                ? ($this->commandFactory)($definitions[$command]->class())
+                : new $definitions[$command]->class();
             if (! $instance instanceof CommandInterface) {
                 throw new RuntimeException('Command must implement CommandInterface.');
             }
